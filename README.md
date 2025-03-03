@@ -60,8 +60,8 @@ This could be implemented using Module Federation (Webpack) or a similar approac
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/vitesse-money-transfer.git
-   cd vitesse-money-transfer
+   git clone https://github.com/michalmalinowski87/money-transfer-ui
+   cd money-transfer-ui
    ```
 
 2. Install dependencies
