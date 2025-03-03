@@ -18,7 +18,6 @@ import {
 import { styled } from '@mui/material/styles';
 import { LogoutOutlined, Person } from '@mui/icons-material';
 import Image from 'next/image';
-// Import common components
 import { AuthProvider } from '../contexts/AuthContext';
 import theme from '../theme/theme';
 import { useAuth } from '../contexts/AuthContext';
@@ -35,19 +34,16 @@ const StyledFooter = styled(Box)(({ theme }) => ({
   color: 'white',
 }));
 
-// Logo container for proper alignment
 const LogoContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center'
 }));
 
-// Navigation header with hamburger menu and user dropdown
 const Header = () => {
   const { user, logout } = useAuth();
-  const [drawerOpen, setDrawerOpen] = useState(false);
+
   const [userMenuAnchor, setUserMenuAnchor] = useState(null);
   
-  const handleDrawerToggle = () => setDrawerOpen(!drawerOpen);
   const handleUserMenuOpen = (event) => setUserMenuAnchor(event.currentTarget);
   const handleUserMenuClose = () => setUserMenuAnchor(null);
   const handleLogout = () => {
@@ -87,7 +83,7 @@ const Header = () => {
             >
               <MenuItem disabled>
                 <Typography variant="body2">
-                  Logged in as: <strong>{user?.name }</strong>
+                  Logged in as: <strong>{user?.name}</strong>
                 </Typography>
               </MenuItem>
               <Divider />
