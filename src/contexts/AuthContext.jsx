@@ -1,10 +1,10 @@
+'use client';
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // Using navigation instead of router
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
-// Create auth context
 const AuthContext = createContext();
-
-// Mock users for the three personas
 const MOCK_USERS = [
   {
     id: '1',
@@ -31,17 +31,19 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Only run localStorage operations on client side
   useEffect(() => {
-    // Check for stored user on first load
-    const storedUser = localStorage.getItem('user');
+    const storedUser = Cookies.get('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error('Error parsing user cookie:', error);
+        Cookies.remove('user');
+      }
     }
     setLoading(false);
   }, []);
 
-  // Login function
   const login = (username, password) => {
     // In a real app, we would validate credentials against an API
     // For this demo, we'll just accept any password for the mock users
@@ -49,9 +51,11 @@ export const AuthProvider = ({ children }) => {
     
     if (foundUser) {
       setUser(foundUser);
-      localStorage.setItem('user', JSON.stringify(foundUser));
-      
-      // Redirect to the appropriate dashboard
+      Cookies.set('user', JSON.stringify(foundUser), { 
+        expires: 1, // Expires in 1 day
+        path: '/',
+        sameSite: 'strict'
+      });
       router.push(`/${foundUser.role}`);
       return true;
     }
@@ -59,10 +63,9 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
-  // Logout function
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    Cookies.remove('user', { path: '/' });
     router.push('/login');
   };
 
@@ -81,7 +84,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {

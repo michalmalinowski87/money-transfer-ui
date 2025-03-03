@@ -5,12 +5,11 @@ import {
   Box, 
   Container, 
   Typography, 
-  Alert
+  Alert,
+  CircularProgress
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { LockOutlined } from '@mui/icons-material';
-
-// Import common components
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '../../components/atoms/Button/Button';
 import FormField from '../../components/atoms/FormField/FormField';
@@ -21,25 +20,49 @@ const LoginForm = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(1),
 }));
 
+const LoadingButton = styled(Button)(({ theme }) => ({
+  position: 'relative',
+}));
+
+const SpinnerWrapper = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  marginTop: -12,
+  marginLeft: -12,
+}));
+
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     
     if (!username) {
       setError('Please select a user type');
       return;
     }
+    setIsLoading(true);
     
-    // Attempt to log in
-    const success = login(username, password);
-    
-    if (!success) {
-      setError('Invalid credentials');
+    try {
+      // Adding a slight delay to simulate network request
+      // In a real app, this would be the actual login API call time
+      setTimeout(() => {
+        const success = login(username, password);
+        
+        if (!success) {
+          setError('Invalid credentials');
+          setIsLoading(false);
+        }
+        // No need to reset loading state on success since we'll redirect
+      }, 1000);
+    } catch (err) {
+      setError('An error occurred during login');
+      setIsLoading(false);
     }
   };
 
@@ -96,6 +119,7 @@ export default function LoginPage() {
             }}
             required
             fullWidth
+            disabled={isLoading}
           />
           <FormField
             id="password"
@@ -106,15 +130,21 @@ export default function LoginPage() {
             helperText="Any password will work for this demo"
             required
             fullWidth
+            disabled={isLoading}
           />
-          <Button
+          <LoadingButton
             type="submit"
             fullWidth
             variant="primary"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, minHeight: '37px' }}
+            disabled={isLoading}
           >
-            Sign In
-          </Button>
+            {isLoading ? (
+              <SpinnerWrapper>
+                <CircularProgress size={24} color="inherit" />
+              </SpinnerWrapper>
+            ) : 'Sign In'}
+          </LoadingButton>
         </LoginForm>
       </Card>
     </Container>
