@@ -63,7 +63,8 @@ const Header = () => {
             priority
           />
         </LogoContainer>
-        <Box display="flex" alignItems="center">
+        {user && (
+          <Box display="flex" alignItems="center">
             <IconButton
               onClick={handleUserMenuOpen}
               color="inherit"
@@ -95,6 +96,7 @@ const Header = () => {
               </MenuItem>
             </Menu>
           </Box>
+        )}
       </Toolbar>
     </GradientAppBar>
   );
