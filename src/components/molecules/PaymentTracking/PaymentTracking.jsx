@@ -1,18 +1,19 @@
-import React from 'react';
+import { 
+  Check, 
+  Notifications,
+  AccessTime
+} from '@mui/icons-material';
 import { 
   Box, 
   Typography, 
   Paper,
   Stack
 } from '@mui/material';
-import { 
-  Check, 
-  Notifications,
-  AccessTime 
-} from '@mui/icons-material';
+import PropTypes from 'prop-types';
 
 import Button from '../../atoms/Button/Button';
 import StatusBadge from '../../atoms/StatusBadge/StatusBadge';
+
 
 // Action button configurations
 const ACTION_BUTTONS = {
@@ -54,7 +55,7 @@ const PaymentTracking = ({
       {...props}
     >
       {/* Header section with payment info */}
-      <Box display="flex" justifyContent="space-between" alignItems="flex-start" mb={3}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
         <Box>
           <Typography variant="h6" fontWeight={500} gutterBottom>
             {sender}
@@ -191,6 +192,23 @@ const PaymentTracking = ({
       </Stack>
     </Paper>
   );
+};
+
+PaymentTracking.propTypes = {
+  id: PropTypes.string.isRequired,
+  sender: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+  initiatedDate: PropTypes.string.isRequired,
+  expectedDate: PropTypes.string.isRequired,
+  reference: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  statusTimeline: PropTypes.arrayOf(PropTypes.shape({
+    status: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  })),
+  actions: PropTypes.arrayOf(PropTypes.string),
+  onActionClick: PropTypes.func,
 };
 
 export default PaymentTracking;

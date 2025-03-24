@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { Box, CircularProgress, Typography } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
 import { useAuth } from '../contexts/AuthContext';
 
 // Root page - redirects to appropriate dashboard or login

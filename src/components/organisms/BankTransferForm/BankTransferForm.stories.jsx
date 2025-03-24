@@ -1,10 +1,11 @@
-import React from 'react';
-import BankTransferForm from './BankTransferForm';
-import { action } from '@storybook/addon-actions';
 import { Box } from '@mui/material';
+import { action } from '@storybook/addon-actions';
+
 import { COUNTRIES } from '../../../lib/constants';
 
-export default {
+import BankTransferForm from './BankTransferForm';
+
+const BankTransferFormStories = {
   title: 'Organisms/BankTransferForm',
   component: BankTransferForm,
   parameters: {
@@ -113,3 +114,5 @@ LoadingState.args = {
   isLoading: true,
   disabled: false
 };
+
+export default BankTransferFormStories;

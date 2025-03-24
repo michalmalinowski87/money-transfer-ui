@@ -1,8 +1,8 @@
-import React from 'react';
-import StatusBadge from './StatusBadge';
 import { Box, Stack, Typography } from '@mui/material';
 
-export default {
+import StatusBadge from './StatusBadge';
+
+const StatusBadgeStories = {
   title: 'Atoms/StatusBadge',
   component: StatusBadge,
   argTypes: {
@@ -73,7 +73,7 @@ export const AllStatuses = () => {
       </Typography>
       <Stack spacing={2}>
         {statuses.map((status) => (
-          <Box key={status} display="flex" alignItems="center">
+          <Box key={status} sx={{ display: 'flex', alignItems: 'center' }}>
             <Box width={120}>
               <Typography variant="body2" color="textSecondary">
                 {status.charAt(0).toUpperCase() + status.slice(1)}:
@@ -86,3 +86,5 @@ export const AllStatuses = () => {
     </Box>
   );
 };
+
+export default StatusBadgeStories;

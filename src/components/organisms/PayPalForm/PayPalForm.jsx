@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Alert } from '@mui/material';
 import { Email } from '@mui/icons-material';
-import FormField from '../../atoms/FormField/FormField';
+import { Alert } from '@mui/material';
+import { useState, useEffect } from 'react';
+
+import { PAYMENT_METHODS } from '../../../lib/constants';
+import { isValidEmail } from '../../../lib/validation';
 import Button from '../../atoms/Button/Button';
+import FormField from '../../atoms/FormField/FormField';
 import FormLayout from '../../molecules/FormLayout/FormLayout';
 
 // Import shared validation utilities
-import { isValidEmail } from '../../../lib/validation';
-import { PAYMENT_METHODS } from '../../../lib/constants';
 
 /**
  * PayPal payment method organism

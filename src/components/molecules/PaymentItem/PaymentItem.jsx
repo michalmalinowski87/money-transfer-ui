@@ -1,19 +1,23 @@
-import React from 'react';
-import { Box, Typography, Stack, Paper } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { 
-  AttachMoney, 
-  Visibility, 
-  Edit, 
-  Delete, 
-  Cancel, 
+  Visibility,
+  Edit,
+  Delete,
+  Cancel,
   Download,
   ContentCopy,
   Notifications
 } from '@mui/icons-material';
+import {
+  Box,
+  Typography,
+  Paper,
+  Stack
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 
-import StatusBadge from '../../atoms/StatusBadge/StatusBadge';
 import IconButton from '../../atoms/IconButton/IconButton';
+import StatusBadge from '../../atoms/StatusBadge/StatusBadge';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -25,19 +29,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-const IconContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: 40,
-  height: 40,
-  borderRadius: '50%',
-  backgroundColor: 'white',
-  border: '1px solid rgb(229, 231, 235)',
-  marginRight: theme.spacing(2),
-}));
-
-const PaymentDetailsStyled = styled(Box)(({ theme }) => ({
+const PaymentDetailsStyled = styled(Box)(() => ({
   flexGrow: 1,
 }));
 
@@ -106,14 +98,12 @@ const PaymentItem = ({
 
   return (
     <StyledPaper elevation={0} {...props}>
-      <Box display="flex" alignItems="center">
-        <IconContainer>
-          <AttachMoney color={paymentItem.status === 'completed' ? 'success' : 'action'} />
-        </IconContainer>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="h6">{paymentItem.recipient || paymentItem.sender || 'N/A'}</Typography>
+          <StatusBadge status={paymentItem.status} />
+        </Box>
         <PaymentDetailsStyled>
-          <Typography variant="subtitle1" fontWeight={500}>
-            {paymentItem.recipient || paymentItem.sender || 'N/A'}
-          </Typography>
           <SecondaryText>
             {paymentItem.amount || 'N/A'} • {paymentItem.date || 'N/A'}
           </SecondaryText>
@@ -124,7 +114,6 @@ const PaymentItem = ({
         </PaymentDetailsStyled>
       </Box>
       <Stack direction="row" spacing={0} alignItems="center">
-        <StatusBadge status={paymentItem.status} sx={{ mr: 2 }} />
         <Stack direction="row" spacing={0.5}>
           {actions.map((action) => {
             const config = ACTION_CONFIG[action];
@@ -145,6 +134,19 @@ const PaymentItem = ({
       </Stack>
     </StyledPaper>
   );
+};
+
+PaymentItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  paymentItem: PropTypes.shape({
+    amount: PropTypes.number.isRequired,
+    currency: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    reference: PropTypes.string.isRequired,
+  }).isRequired,
+  actions: PropTypes.arrayOf(PropTypes.string),
+  onActionClick: PropTypes.func,
 };
 
 export default PaymentItem;

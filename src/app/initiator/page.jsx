@@ -1,20 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
 import { 
   Box, 
   Container, 
   Typography, 
   Stepper,
   Step,
+  
   StepLabel
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+
 import Card from '../../components/atoms/Card/Card';
 import { PAYMENT_METHODS, COUNTRIES } from '../../lib/constants';
+
 import PaymentDetails from './paymentSteps/paymentDetails';
-import RecipientInformation from './paymentSteps/recipientInformation';
 import PaymentMethod from './paymentSteps/paymentMethod';
+import RecipientInformation from './paymentSteps/recipientInformation';
 import Review from './paymentSteps/review';
 
 // Wizard steps
@@ -63,6 +66,7 @@ export default function InitiatorDashboard() {
       id: `payment-${Date.now()}`
     };
     
+    // eslint-disable-next-line no-console
     console.log(`Payment ${isDraft ? 'saved as draft' : 'submitted for approval'}:`, formattedData);
     
     // In a real app, this would send data to an API and redirect or show success

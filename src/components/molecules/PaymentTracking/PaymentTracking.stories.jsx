@@ -1,9 +1,9 @@
-import React from 'react';
-import PaymentTracking from './PaymentTracking';
-import { action } from '@storybook/addon-actions';
 import { Box } from '@mui/material';
+import { action } from '@storybook/addon-actions';
 
-export default {
+import PaymentTracking from './PaymentTracking';
+
+const PaymentTrackingStories = {
   title: 'Molecules/PaymentTracking',
   component: PaymentTracking,
   parameters: {
@@ -136,3 +136,5 @@ ShortTrackingTwoSteps.args = {
   ],
   actions: ['notify'],
 };
+
+export default PaymentTrackingStories;

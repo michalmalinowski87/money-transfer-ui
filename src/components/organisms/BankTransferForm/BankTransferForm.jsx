@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { Grid, Alert } from '@mui/material';
-import FormField from '../../atoms/FormField/FormField';
-import Button from '../../atoms/Button/Button';
-import FormLayout from '../../molecules/FormLayout/FormLayout';
+import { useState, useEffect } from 'react';
 
-// Import shared utilities
 import { COUNTRIES, PAYMENT_METHODS } from '../../../lib/constants';
 import { 
   isNotEmpty, 
@@ -13,6 +9,11 @@ import {
   isValidIBAN, 
   isValidBICSwift 
 } from '../../../lib/validation';
+import Button from '../../atoms/Button/Button';
+import FormField from '../../atoms/FormField/FormField';
+import FormLayout from '../../molecules/FormLayout/FormLayout';
+
+// Import shared utilities
 
 /**
  * Bank Transfer payment method component

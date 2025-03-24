@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { LockOutlined } from '@mui/icons-material';
 import { 
   Box, 
   Container, 
@@ -9,22 +9,23 @@ import {
   CircularProgress
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { LockOutlined } from '@mui/icons-material';
-import { useAuth } from '../../contexts/AuthContext';
+import { useState } from 'react';
+
 import Button from '../../components/atoms/Button/Button';
-import FormField from '../../components/atoms/FormField/FormField';
 import Card from '../../components/atoms/Card/Card';
+import FormField from '../../components/atoms/FormField/FormField';
+import { useAuth } from '../../contexts/AuthContext';
 
 const LoginForm = styled(Box)(({ theme }) => ({
   width: '100%',
   marginTop: theme.spacing(1),
 }));
 
-const LoadingButton = styled(Button)(({ theme }) => ({
+const LoadingButton = styled(Button)(() => ({
   position: 'relative',
 }));
 
-const SpinnerWrapper = styled(Box)(({ theme }) => ({
+const SpinnerWrapper = styled(Box)(() => ({
   position: 'absolute',
   top: '50%',
   left: '50%',

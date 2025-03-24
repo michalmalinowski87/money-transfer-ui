@@ -1,9 +1,9 @@
-import React from 'react';
-import FormLayout from './FormLayout';
-import Button from '../../atoms/Button/Button';
 import { Box, Typography } from '@mui/material';
 
-export default {
+import Button from '../../atoms/Button/Button';
+import FormLayout from './FormLayout';
+
+const FormLayoutStories = {
   title: 'Molecules/FormLayout',
   component: FormLayout,
   parameters: {
@@ -59,3 +59,5 @@ WithoutTitle.args = {
     </>
   ),
 };
+
+export default FormLayoutStories;

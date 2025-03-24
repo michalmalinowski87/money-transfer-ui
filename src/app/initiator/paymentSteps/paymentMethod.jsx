@@ -1,6 +1,5 @@
 'use client';
 
-import React, { lazy, Suspense } from 'react';
 import { 
   Box, 
   Typography, 
@@ -8,6 +7,8 @@ import {
   Divider,
   CircularProgress
 } from '@mui/material';
+import { lazy, Suspense } from 'react';
+
 import { PAYMENT_METHODS } from '../../../lib/constants';
 import { getFormattedAmount } from '../../../lib/utils';
 
@@ -36,15 +37,41 @@ export default function PaymentMethod({ paymentData, onPaymentMethodChange, onNe
   const handlePaymentMethodCancel = (data) => onBack({ type: data.type, data: data.data });
   const selectPaymentMethod = (methodType) => onPaymentMethodChange(methodType);
 
-  // TODO: This should be removed when refactoring is done
-  const updatePaymentMethodData = (methodData) => {
-    setPaymentData(prev => ({
-      ...prev,
-      paymentMethod: {
-        ...prev.paymentMethod,
-        data: methodData
-      }
-    }));
+  // Render the appropriate payment method form based on selection
+  const renderPaymentMethodForm = () => {
+    switch (paymentData.paymentMethod?.type) {
+      case PAYMENT_METHODS.BANK_TRANSFER:
+        return (
+          <BankTransferForm
+            initialData={paymentData.paymentMethod?.data}
+            onSubmit={handlePaymentMethodSubmit}
+            onCancel={handlePaymentMethodCancel}
+            isLoading={false}
+            currency={paymentData.currency}
+            recipient={paymentData.recipient}
+          />
+        );
+      case PAYMENT_METHODS.CREDIT_CARD:
+        return (
+          <CreditCardForm
+            initialData={paymentData.paymentMethod?.data}
+            onSubmit={handlePaymentMethodSubmit}
+            onCancel={handlePaymentMethodCancel}
+            currency={getFormattedAmount({ amount: paymentData.basicInfo.amount, currency: paymentData.basicInfo.currency })}
+          />
+        );
+      case PAYMENT_METHODS.PAYPAL:
+        return (
+          <PayPalForm
+            initialData={paymentData.paymentMethod?.data}
+            onSubmit={handlePaymentMethodSubmit}
+            onCancel={handlePaymentMethodCancel}
+            currency={getFormattedAmount({ amount: paymentData.basicInfo.amount, currency: paymentData.basicInfo.currency })}
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -104,31 +131,7 @@ export default function PaymentMethod({ paymentData, onPaymentMethodChange, onNe
       </Grid>
       <Divider sx={{ my: 3 }} />
       <Suspense fallback={<LoadingComponent />}>
-        {paymentData.paymentMethod.type === PAYMENT_METHODS.BANK_TRANSFER && (
-          <BankTransferForm
-            initialData={paymentData.paymentMethod.data}
-            onSubmit={handlePaymentMethodSubmit}
-            onCancel={handlePaymentMethodCancel}
-            currency={getFormattedAmount({ amount: paymentData.basicInfo.amount, currency: paymentData.basicInfo.currency })}
-            recipient={paymentData.recipient}
-          />
-        )}
-        {paymentData.paymentMethod.type === PAYMENT_METHODS.CREDIT_CARD && (
-          <CreditCardForm
-            initialData={paymentData.paymentMethod.data}
-            onSubmit={handlePaymentMethodSubmit}
-            onCancel={handlePaymentMethodCancel}
-            currency={getFormattedAmount({ amount: paymentData.basicInfo.amount, currency: paymentData.basicInfo.currency })}
-          />
-        )}
-        {paymentData.paymentMethod.type === PAYMENT_METHODS.PAYPAL && (
-          <PayPalForm
-            initialData={paymentData.paymentMethod.data}
-            onSubmit={handlePaymentMethodSubmit}
-            onCancel={handlePaymentMethodCancel}
-            currency={getFormattedAmount({ amount: paymentData.basicInfo.amount, currency: paymentData.basicInfo.currency })}
-          />
-        )}
+        {renderPaymentMethodForm()}
       </Suspense>
     </Box>
   );

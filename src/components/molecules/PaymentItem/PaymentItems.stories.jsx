@@ -1,10 +1,10 @@
-import React from 'react';
-import PaymentItem from './PaymentItem';
-import { action } from '@storybook/addon-actions';
 import { Box } from '@mui/material';
+import { action } from '@storybook/addon-actions';
 
-export default {
-  title: 'Molecules/PaymentItem',
+import PaymentItem from './PaymentItem';
+
+const PaymentItemsStories = {
+  title: 'Molecules/PaymentItems',
   component: PaymentItem,
   parameters: {
     layout: 'padded',
@@ -151,3 +151,5 @@ export const PaymentCollection = () => {
     </Box>
   );
 };
+
+export default PaymentItemsStories;

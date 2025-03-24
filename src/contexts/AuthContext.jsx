@@ -1,8 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 const MOCK_USERS = [
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     initializeAuth();
   }, []);
 
-  const login = (username, password) => {
+  const login = (username) => {
     // In a real app, we would validate credentials against an API
     // For this demo, we'll just accept any password for the mock users
     const foundUser = MOCK_USERS.find((u) => u.username === username);

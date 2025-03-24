@@ -1,5 +1,4 @@
-import React from 'react';
-import { 
+import {
   FormControl,
   FormHelperText,
   MenuItem,
@@ -8,9 +7,17 @@ import {
   Typography
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 
 const StyledFormControl = styled(FormControl)(({ theme }) => ({
   width: '100%',
+  '& .MuiInputBase-root': {
+    height: '48px',
+  },
+  '& .MuiSelect-select': {
+    display: 'flex',
+    alignItems: 'center',
+  },
   marginBottom: theme.spacing(2),
 }));
 
@@ -19,15 +26,24 @@ const StyledLabel = styled(Typography)(({ theme }) => ({
   fontWeight: 500,
   color: theme.palette.text.primary,
   marginBottom: theme.spacing(0.5),
-  display: 'flex',
-  alignItems: 'center',
+  sx: {
+    display: 'flex',
+    alignItems: 'center',
+  }
 }));
 
 // Orange asterisk for required fields
-const RequiredAsterisk = styled('span')(({ theme }) => ({
+const RequiredAsterisk = styled('span')(() => ({
   color: '#ff7043', // Orange color to match the theme
   marginLeft: '4px',
   fontWeight: 'bold',
+}));
+
+const StyledTextField = styled(TextField)(() => ({
+  width: '100%',
+  '& .MuiInputBase-root': {
+    height: '48px',
+  },
 }));
 
 const FormField = ({
@@ -41,7 +57,6 @@ const FormField = ({
   error,
   required = false,
   fullWidth = true,
-  select = false,
   selectOptions = [],
   optionLabels = {},
   disabled = false,
@@ -90,7 +105,7 @@ const FormField = ({
         {label}
         {required && <RequiredAsterisk>*</RequiredAsterisk>}
       </StyledLabel>
-      <TextField
+      <StyledTextField
         id={id}
         placeholder={placeholder}
         value={value || ''}
@@ -107,6 +122,24 @@ const FormField = ({
       />
     </StyledFormControl>
   );
+};
+
+FormField.propTypes = {
+  id: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'password', 'email', 'number', 'select']),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onChange: PropTypes.func.isRequired,
+  helperText: PropTypes.string,
+  error: PropTypes.bool,
+  required: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  select: PropTypes.bool,
+  selectOptions: PropTypes.arrayOf(PropTypes.string),
+  optionLabels: PropTypes.object,
+  disabled: PropTypes.bool,
+  InputProps: PropTypes.object,
 };
 
 export default FormField;

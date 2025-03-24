@@ -1,9 +1,9 @@
-import React from 'react';
-import CreditCardForm from './CreditCardForm';
-import { action } from '@storybook/addon-actions';
 import { Box } from '@mui/material';
+import { action } from '@storybook/addon-actions';
 
-export default {
+import CreditCardForm from './CreditCardForm';
+
+const CreditCardFormStories = {
   title: 'Organisms/CreditCardForm',
   component: CreditCardForm,
   parameters: {
@@ -76,3 +76,5 @@ LoadingState.args = {
   isLoading: true,
   disabled: false
 };
+
+export default CreditCardFormStories;

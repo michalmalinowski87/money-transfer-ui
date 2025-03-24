@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import FormField from './FormField';
+import { 
+  Search,
+  Email,
+  Lock,
+  CreditCard
+} from '@mui/icons-material';
 import { Box, Grid, Paper } from '@mui/material';
-import { Search, CreditCard, Email, Lock } from '@mui/icons-material';
+import { useState } from 'react';
 
-export default {
+import FormField from './FormField';
+
+const FormFieldStories = {
   title: 'Atoms/FormField',
   component: FormField,
   parameters: {
@@ -248,3 +254,5 @@ export const FormLayout = () => {
 FormLayout.parameters = {
   controls: { disable: true },
 };
+
+export default FormFieldStories;

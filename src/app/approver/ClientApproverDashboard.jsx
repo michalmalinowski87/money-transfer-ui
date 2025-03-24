@@ -1,6 +1,5 @@
 'use client';
 
-import React, { useState } from 'react';
 import { 
   Box, 
   Container,
@@ -11,9 +10,12 @@ import {
   Divider
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+
 import Card from '../../components/atoms/Card/Card';
-import PaymentItem from '../../components/molecules/PaymentItem/PaymentItem';
 import PaymentDetails from '../../components/molecules/PaymentDetails/PaymentDetails';
+import PaymentItem from '../../components/molecules/PaymentItem/PaymentItem';
 
 const PageHeader = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(4),
@@ -33,6 +35,12 @@ const TabPanel = ({ children, value, index, ...props }) => {
   );
 };
 
+const handleActionClick = (action, id) => {
+  // eslint-disable-next-line no-console
+  console.log(`Action: ${action}, Payment ID: ${id}`);
+  // In a real app, this would trigger API calls using server actions
+};
+
 export default function ClientApproverDashboard({ 
   pendingApprovals, 
   approvedPayments, 
@@ -42,11 +50,6 @@ export default function ClientApproverDashboard({
   
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
-  };
-  
-  const handleActionClick = (action, id) => {
-    console.log(`Action: ${action}, Payment ID: ${id}`);
-    // In a real app, this would trigger API calls using server actions
   };
 
   return (
@@ -139,3 +142,33 @@ export default function ClientApproverDashboard({
     </Container>
   );
 }
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+ClientApproverDashboard.propTypes = {
+  pendingApprovals: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    currency: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
+  approvedPayments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    currency: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
+  rejectedPayments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    currency: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
+};

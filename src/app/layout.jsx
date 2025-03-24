@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { LogoutOutlined, Person } from '@mui/icons-material';
 import { 
   AppBar, 
   Toolbar, 
@@ -16,13 +16,14 @@ import {
   Divider
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { LogoutOutlined, Person } from '@mui/icons-material';
 import Image from 'next/image';
-import { AuthProvider } from '../contexts/AuthContext';
-import theme from '../theme/theme';
-import { useAuth } from '../contexts/AuthContext';
+import 
+{ useState } from 'react';
 
-const GradientAppBar = styled(AppBar)(({ theme }) => ({
+import { AuthProvider , useAuth } from '../contexts/AuthContext';
+import theme from '../theme/theme';
+
+const GradientAppBar = styled(AppBar)(() => ({
   background: 'linear-gradient(90deg, #f44336 0%, #ff7043 100%)',
   boxShadow: 'none',
 }));
@@ -34,7 +35,7 @@ const StyledFooter = styled(Box)(({ theme }) => ({
   color: 'white',
 }));
 
-const LogoContainer = styled(Box)(({ theme }) => ({
+const LogoContainer = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center'
 }));
@@ -64,7 +65,7 @@ const Header = () => {
           />
         </LogoContainer>
         {user && (
-          <Box display="flex" alignItems="center">
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton
               onClick={handleUserMenuOpen}
               color="inherit"
@@ -111,7 +112,7 @@ const Footer = () => {
           © 2025 Vitesse Payments. All rights reserved.
         </Typography>
         <Typography variant="body2" align="center" sx={{ mt: 1, color: 'grey.500' }}>
-          Trusted by the world's leading insurance companies
+          Trusted by the world&apos;s leading insurance companies
         </Typography>
       </Container>
     </StyledFooter>
@@ -126,7 +127,7 @@ export default function RootLayout({ children }) {
         <meta name="description" content="Faster payments, safer capital, smarter treasury" />
         <link href="https://cdn.prod.website-files.com/65f186b3e59bbc5818e7cc63/65f18a1411724e22bdbc27de_Vitesse-Favicon.png" rel="shortcut icon" type="image/x-icon"></link>
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <AuthProvider>

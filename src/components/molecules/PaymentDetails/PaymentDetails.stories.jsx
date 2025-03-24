@@ -1,9 +1,9 @@
-import React from 'react';
-import PaymentDetails from './PaymentDetails';
-import { action } from '@storybook/addon-actions';
 import { Box } from '@mui/material';
+import { action } from '@storybook/addon-actions';
 
-export default {
+import PaymentDetails from './PaymentDetails';
+
+const PaymentDetailsStories = {
   title: 'Molecules/PaymentDetails',
   component: PaymentDetails,
   parameters: {
@@ -142,3 +142,5 @@ WithMinimalDetails.args = {
   },
   actions: ['approve', 'reject'],
 };
+
+export default PaymentDetailsStories;

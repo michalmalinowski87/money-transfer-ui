@@ -1,5 +1,10 @@
-import React from 'react';
-import { Box, Typography, Divider, Stack } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Divider,
+  Stack
+} from '@mui/material';
+import PropTypes from 'prop-types';
 
 const FormLayout = ({ title, subtitle, children, actions }) => {
   return (
@@ -18,8 +23,12 @@ const FormLayout = ({ title, subtitle, children, actions }) => {
         </>
       )}
       
-      <Box component="div" sx={{ mb: 3 }}>
-        {children}
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="h6" gutterBottom>
+          {title}
+        </Typography>
+        <Divider sx={{ mb: 2 }} />
+        <Stack spacing={2}>{children}</Stack>
       </Box>
       
       {actions && (
@@ -29,6 +38,13 @@ const FormLayout = ({ title, subtitle, children, actions }) => {
       )}
     </Box>
   );
+};
+
+FormLayout.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  actions: PropTypes.node,
 };
 
 export default FormLayout;

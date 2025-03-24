@@ -1,9 +1,9 @@
-import React from 'react';
-import PayPalForm from './PayPalForm';
-import { action } from '@storybook/addon-actions';
 import { Box } from '@mui/material';
+import { action } from '@storybook/addon-actions';
 
-export default {
+import PayPalForm from './PayPalForm';
+
+const PayPalFormStories = {
   title: 'Organisms/PayPalForm',
   component: PayPalForm,
   parameters: {
@@ -18,6 +18,8 @@ export default {
     disabled: { control: 'boolean' },
   },
 };
+
+export default PayPalFormStories;
 
 const Template = (args) => (
   <Box sx={{ width: '100%', maxWidth: 800 }}>

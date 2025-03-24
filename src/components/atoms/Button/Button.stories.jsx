@@ -1,8 +1,8 @@
-import React from 'react';
-import Button from './Button';
 import { Add, Edit, Delete, Check, Send } from '@mui/icons-material';
 
-export default {
+import Button from './Button';
+
+const ButtonStories = {
   title: 'Atoms/Button',
   component: Button,
   // These argTypes define the controls
@@ -120,3 +120,5 @@ export const AllVariants = () => (
 AllVariants.parameters = {
   controls: { disable: true }, // Disable controls for this story
 };
+
+export default ButtonStories;

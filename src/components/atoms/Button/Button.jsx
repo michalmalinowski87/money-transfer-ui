@@ -1,5 +1,6 @@
-import React from 'react';
+import styled from '@emotion/styled';
 import { Button as MuiButton } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const Button = ({
   children,
@@ -31,12 +32,25 @@ const Button = ({
     }
   };
 
-  const { color, muiVariant } = getConfig();
+  const { muiVariant } = getConfig();
+
+  const StyledButton = styled(MuiButton)(({ theme, color }) => ({
+    textTransform: 'none',
+    borderRadius: theme.shape.borderRadius,
+    padding: theme.spacing(1, 2),
+    minWidth: '120px',
+    '& .MuiButton-startIcon': {
+      marginRight: theme.spacing(1),
+      '& .MuiSvgIcon-root': {
+        fontSize: '20px',
+        sx: { color: color }
+      },
+    },
+  }));
 
   return (
-    <MuiButton
+    <StyledButton
       variant={muiVariant}
-      color={color}
       size={size}
       onClick={onClick}
       fullWidth={fullWidth}
@@ -48,8 +62,20 @@ const Button = ({
       {...props}
     >
       {children}
-    </MuiButton>
+    </StyledButton>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'danger']),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  onClick: PropTypes.func,
+  fullWidth: PropTypes.bool,
+  disabled: PropTypes.bool,
+  startIcon: PropTypes.node,
+  endIcon: PropTypes.node,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
 };
 
 export default Button;

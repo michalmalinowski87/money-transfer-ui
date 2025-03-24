@@ -1,10 +1,10 @@
-import React from 'react';
-import ClientApproverDashboard from './ClientApproverDashboard';
 import { 
   getMockPendingApprovals, 
   getMockApprovedPayments, 
   getMockRejectedPayments 
 } from '../../lib/mockData';
+
+import ClientApproverDashboard from './ClientApproverDashboard';
 
 export default async function ApproverPage() {
   // In a real app, these would be database or API calls

@@ -1,5 +1,5 @@
-import React from 'react';
 import { IconButton as MuiIconButton, Tooltip } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const IconButton = ({
   icon,
@@ -57,7 +57,7 @@ const IconButton = ({
     <Tooltip title={tooltip} arrow>
       <span>
         <MuiIconButton
-          color={muiColor}
+          sx={{ color: muiColor }}
           size={size}
           onClick={onClick}
           disabled={disabled}
@@ -68,6 +68,27 @@ const IconButton = ({
       </span>
     </Tooltip>
   );
+};
+
+IconButton.propTypes = {
+  icon: PropTypes.node.isRequired,
+  tooltip: PropTypes.string,
+  onClick: PropTypes.func,
+  color: PropTypes.string,
+  actionType: PropTypes.oneOf([
+    'view',
+    'download',
+    'copy',
+    'edit',
+    'notify',
+    'approve',
+    'accept',
+    'delete',
+    'cancel',
+    'reject'
+  ]),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  disabled: PropTypes.bool,
 };
 
 export default IconButton;

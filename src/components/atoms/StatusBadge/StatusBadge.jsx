@@ -1,13 +1,13 @@
-import React from 'react';
-import { Chip } from '@mui/material';
-import { 
+import {
   CheckCircle,
   Error,
   HourglassEmpty,
   Edit,
   WarningAmber
 } from '@mui/icons-material';
+import { Chip } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 
 // Status configurations
 const STATUS_CONFIG = {
@@ -43,7 +43,7 @@ const STATUS_CONFIG = {
   }
 };
 
-const StyledChip = styled(Chip)(({ theme, statuscolor }) => ({
+const StyledChip = styled(Chip)(({ theme }) => ({
   fontWeight: 500,
   fontSize: '12px',
   '& .MuiChip-icon': {
@@ -73,10 +73,16 @@ const StatusBadge = ({
       label={label}
       color={config.color}
       size={size}
-      statuscolor={status}
+      sx={{ statuscolor: status }}
       {...props}
     />
   );
+};
+
+StatusBadge.propTypes = {
+  status: PropTypes.oneOf(['completed', 'pending', 'processing', 'approved', 'rejected', 'draft']).isRequired,
+  customLabel: PropTypes.string,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 export default StatusBadge;

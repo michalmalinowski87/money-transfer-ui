@@ -1,6 +1,5 @@
-import React from 'react';
-import { ThemeProvider as MuiThemeProvider, createTheme, StyledEngineProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider as MuiThemeProvider, createTheme, StyledEngineProvider } from '@mui/material/styles';
 
 // Import your theme configuration
 import themeConfig from './theme';

@@ -1,5 +1,3 @@
-import React from 'react';
-import IconButton from './IconButton';
 import { 
   Visibility, 
   Edit as EditIcon, // Renamed to avoid conflict
@@ -12,7 +10,9 @@ import {
 } from '@mui/icons-material';
 import { Box, Typography, Divider } from '@mui/material';
 
-export default {
+import IconButton from './IconButton';
+
+const IconButtonStories = {
   title: 'Atoms/IconButton',
   component: IconButton,
   // These argTypes define the controls
@@ -185,3 +185,5 @@ export const ActionGroups = () => (
 ActionGroups.parameters = {
   controls: { disable: true },
 };
+
+export default IconButtonStories;

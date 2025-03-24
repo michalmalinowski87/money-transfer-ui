@@ -1,6 +1,5 @@
 'use client';
 
-import React, { useState } from 'react';
 import { 
   Box, 
   Container, 
@@ -11,6 +10,8 @@ import {
   Divider
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React, { useState } from 'react';
+
 import Card from '../../components/atoms/Card/Card';
 import PaymentItem from '../../components/molecules/PaymentItem/PaymentItem';
 import PaymentTracking from '../../components/molecules/PaymentTracking/PaymentTracking';
@@ -45,6 +46,7 @@ export default function ReceiverDashboard({
   };
   
   const handleActionClick = (action, id) => {
+    // eslint-disable-next-line no-console
     console.log(`Action: ${action}, Payment ID: ${id}`);
     // In a real app, this would trigger API calls or state changes
   };

@@ -1,4 +1,3 @@
-import React from 'react';
 import Card from './Card';
 
 // Use simple div and text instead of MUI components
@@ -13,7 +12,7 @@ const SimpleActionButton = () => (
   <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>⋮</button>
 );
 
-export default {
+const CardStories = {
   title: 'Atoms/Card',
   component: Card,
   argTypes: {
@@ -94,3 +93,5 @@ ComplexCard.args = {
     </div>
   )
 };
+
+export default CardStories;

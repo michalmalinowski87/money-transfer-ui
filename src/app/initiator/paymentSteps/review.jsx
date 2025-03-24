@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
 import { 
   Box, 
   Typography, 
   Stack,
   Divider
 } from '@mui/material';
+
 import Button from '../../../components/atoms/Button/Button';
 import { PAYMENT_METHODS, COUNTRIES } from '../../../lib/constants';
 import { getFormattedAmount } from '../../../lib/utils';

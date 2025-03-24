@@ -1,4 +1,5 @@
 import { getMockIncomingPayments, getMockReceivedPayments } from '../../lib/mockData';
+
 import ReceiverDashboard from './ReceiverDashboard';
 
 export default function ReceiverDashboardPage() {
